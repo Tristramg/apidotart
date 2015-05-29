@@ -1,0 +1,36 @@
+<h1>Metadata</h1>
+<ul>
+  <li> Requested: <%= @q %>
+  <li> Duration: <%= @result["took"] %> </li>
+</ul>
+
+<h1>Data</h1>
+<ul>
+  <% if @result["hits"] && @result["hits"]["hits"] %>
+  <% @result["hits"]["hits"].each do |hit| %>
+    <% image = hit["_source"]["images"][0]["urls"] %>
+    <li>
+    <a href="<%= work_url(hit["_id"]) %>"> MOAR </a>
+      <a href="<%= image["original"] %>">
+        <img src="<%= image["thumbnail"]["url"] %>">
+      </a>
+    </li>
+  <% end %>
+  <% end %>
+</ul>
+
+<h1>Liens</h1>
+<ul>
+  <% @result["aggregations"].each do |key, value| %>
+    <li><%= key %></li>
+    <ul>
+      <% value["buckets"].each do |bucket| %>
+        <li>
+        <a href="/<%= URI::escape(bucket["link"]) %>">
+          <%= bucket["key"] %>
+        </a>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
+</ul>

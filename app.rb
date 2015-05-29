@@ -2,7 +2,7 @@ require 'json'
 require 'net/http'
 require 'sinatra'
 
-API_KEY  = ""
+API_KEY  = ENV["APIDOTART_KEY"]
 HOST = "api.art.rmngp.fr"
 
 helpers do

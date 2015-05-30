@@ -1,0 +1,9 @@
+<ul>
+<% @paths.each do |id, path| %>
+  <li>
+  <% path.each do |img| %>
+    <img width="100" src="<%= img.url %>">
+  <% end %>
+  </li>
+<% end %>
+</ul>

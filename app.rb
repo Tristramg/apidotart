@@ -1,6 +1,11 @@
 require 'json'
 require 'net/http'
 require 'sinatra'
+require 'sinatra/activerecord'
+require './environments'
+
+class Path < ActiveRecord::Base
+end
 
 API_KEY  = ENV["APIDOTART_KEY"]
 HOST = "api.art.rmngp.fr"
@@ -18,7 +23,9 @@ def get_api(uri)
   
   # y’a moins débile ?
   http = Net::HTTP.new(uri.host)
-  result = http.get("#{uri.path}?#{uri.query}", "ApiKey" => API_KEY)
+  path = "#{uri.path}?#{uri.query}"
+  puts path
+  result = http.get(path, "ApiKey" => API_KEY)
 
   JSON.parse(result.body)
 end

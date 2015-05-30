@@ -1,0 +1,15 @@
+<h1>Liens</h1>
+<ul>
+  <% @result["aggregations"].each do |key, value| %>
+    <li><%= key %></li>
+    <ul>
+      <% value["buckets"].each do |bucket| %>
+        <li>
+        <a href="/<%= URI::escape(bucket["link"]) %>">
+          <%= bucket["key"] %>
+        </a>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
+</ul>

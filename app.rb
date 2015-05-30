@@ -24,8 +24,19 @@ def get_api(uri)
 end
 
 get '/' do
-  @result = get_api("http://api.art.rmngp.fr/v1/works/3305")
   erb :index
+end
+
+get '/works' do
+  @result = get_api("http://api.art.rmngp.fr/v1/works?q=monet")
+
+  erb :work
+end
+
+get '/links' do
+  @result = get_api("http://api.art.rmngp.fr/v1/works/3305")
+
+  erb :links
 end
 
 get /#{HOST}/ do

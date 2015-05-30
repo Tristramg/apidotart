@@ -10,7 +10,7 @@
   <% @result["hits"]["hits"].each do |hit| %>
     <% image = hit["_source"]["images"][0]["urls"] %>
     <li>
-    <a href="<%= work_url(hit["_id"]) %>"> MOAR </a>
+    <a href="/links/<%= hit["_id"] %>"> MOAR </a>
       <a href="<%= image["original"] %>">
         <img src="<%= image["thumbnail"]["url"] %>">
       </a>

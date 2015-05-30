@@ -28,21 +28,22 @@ get '/' do
 end
 
 get '/works' do
-  @result = get_api("http://api.art.rmngp.fr/v1/works?q=monet")
+  q = URI::escape(params["q"])
+  @result = get_api("http://api.art.rmngp.fr/v1/works?q=#{q}")
 
   erb :work
 end
 
-get '/links' do
-  @result = get_api("http://api.art.rmngp.fr/v1/works/3305")
+get '/links/:id' do
+  @result = get_api("http://api.art.rmngp.fr/v1/works/#{params[:id]}")
+  @image = @result["hits"]["hits"][0]["_source"]["images"][0]["urls"]["original"]
 
   erb :links
 end
 
-get /#{HOST}/ do
-  # on veut se débarasser du leading /
-  link = URI::decode(request.env["REQUEST_URI"][1..-1])
+get "/raw/*" do
+  link = URI::decode(request.env["REQUEST_URI"][5..-1])
   @result = get_api(link)
-  erb :index
+  erb :work
 end
 

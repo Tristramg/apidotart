@@ -1,3 +1,4 @@
+<img src="<%= @image %>">
 <h1>Liens</h1>
 <ul>
   <% @result["aggregations"].each do |key, value| %>
@@ -5,7 +6,7 @@
     <ul>
       <% value["buckets"].each do |bucket| %>
         <li>
-        <a href="/<%= URI::escape(bucket["link"]) %>">
+        <a href="/raw/<%= URI::escape(bucket["link"]) %>">
           <%= bucket["key"] %>
         </a>
         </li>

@@ -1,9 +1,79 @@
-<ul>
-<% @paths.each do |id, path| %>
-  <li>
+  <div id="container" style="height:100%;"></div>
+  <script src="./sigma.min.js"></script>
+  <script src="./plugins/sigma.renderers.customShapes.min.js"></script>
+  <script src="./plugins/sigma.layout.forceAtlas2.min.js"></script>
+  <script>
+sigma.utils.pkg('sigma.canvas.nodes');
+console.log( ShapeLibrary.enumerate() );
+
+var  g = {
+      nodes: [],
+      edges: []
+    };
+
+var existingNodes = new Set();
+var x = 0;
+var y = 0;
+<% @paths.each do |id, path| %> 
+  y++;
+  x=0;
+  var prev = null;
   <% path.each do |img| %>
-    <img width="100" src="<%= img.url %>">
-  <% end %>
-  </li>
-<% end %>
-</ul>
+    x++;
+    if(!existingNodes.has('<%=img.rmn_id%>')) {
+      node = {
+      // Main attributes:
+id: '<%= img.rmn_id %>',
+      // Display attributes:
+      x: x,
+      y: y,
+      size: 10,
+      type: 'circle',
+      image: {
+url: '<%= img.url %>',
+      clip: 1,
+        scale: 2,
+      }
+      };
+          
+      g.nodes.push(node);
+      existingNodes.add('<%=img.rmn_id%>');
+      }
+
+      if (prev != null) {
+            edge = {
+id: '<%= img.url %>' + prev,
+    source: prev,
+    label: "couocou",
+    target: '<%= img.rmn_id %>',
+    size: 1
+            }
+            g.edges.push(edge);
+          };
+prev = '<%= img.rmn_id %>';
+        <% end %>
+      <% end %>
+
+s = new sigma({
+  graph: g,
+  renderer: {
+    // IMPORTANT:
+    // This works only with the canvas renderer, so the
+    // renderer type set as "canvas" is necessary here.
+    container: document.getElementById('container'),
+    type: 'canvas'
+  },
+  settings: {
+    maxNodeSize: 50,
+    maxEdgeSize: 10,
+    autoResize: false
+  }
+});
+    // Finally, let's ask our sigma instance to refresh:
+    CustomShapes.init(s);
+    s.refresh();
+    //s.startForceAtlas2({worker: true, barnesHutOptimize: false});
+
+  </script>
+
+

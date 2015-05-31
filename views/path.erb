@@ -23,11 +23,11 @@ var existingNodes = new Set();
 var x = 0;
 var y = 0;
 <% @paths.each do |id, path| %> 
-  y++;
+  y+=1;
   x=0;
   var prev = null;
   <% path.each do |img| %>
-    x++;
+    x+=2;
     if(!existingNodes.has('<%=img.rmn_id%>')) {
       node = {
       // Main attributes:
@@ -35,12 +35,12 @@ id: '<%= img.rmn_id %>',
       // Display attributes:
       x: x,
       y: y,
-      size: 10,
+      size: 8,
       type: 'circle',
       image: {
 url: '<%= img.url %>',
       clip: 1,
-        scale: 2,
+        scale: 1.6,
       }
       };
           
@@ -73,8 +73,8 @@ s = new sigma({
     type: 'canvas'
   },
   settings: {
-    maxNodeSize: 50,
-    maxEdgeSize: 10,
+    maxNodeSize: 40,
+    maxEdgeSize: 5,
     labelThreshold: 1,
     defaultLabelColor: '#F00'
   }

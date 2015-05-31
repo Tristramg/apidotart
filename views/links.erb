@@ -1,8 +1,13 @@
-Pop: <%= @pop %>
-<img src="<%= @image %>">
-<h1>Liens</h1>
+<h1>Continu du ton chemin</h1>
+
+<div class="col-md-4">
+  <img style="width:100%" src="<%= @image %>">
+</div>
+
+<div class="col-md-4">
+  <h2>Liens</h2>
 <ul>
-  <% @result["aggregations"].each do |key, value| %>
+  <% @result["aggregations"].reject{|k,v| v["buckets"].empty?}.each do |key, value| %>
     <li><%= key %></li>
     <ul>
       <% value["buckets"].each do |bucket| %>
@@ -15,3 +20,8 @@ Pop: <%= @pop %>
     </ul>
   <% end %>
 </ul>
+</div>
+
+<div class="col-md-4">
+  ARRRRRBBRRRE
+</div>

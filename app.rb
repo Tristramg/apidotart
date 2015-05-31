@@ -51,7 +51,7 @@ get '/works' do
   @path_id = params[:path_id]
   @origin_key = params[:origin_key]
   @origin_value = @origin_key == "start" ? q : params[:origin_value]
-  @result = get_api("http://api.art.rmngp.fr/v1/works?q=#{q}")
+  @result = get_api("http://api.art.rmngp.fr/v1/works?q=#{q}&per_page=20")
 
   erb :work
 end
@@ -64,7 +64,6 @@ get '/links/:id' do
 
   @result = get_api("http://api.art.rmngp.fr/v1/works/#{params[:id]}")
   @image = @result["hits"]["hits"][0]["_source"]["images"][0]["urls"]["original"]
-  @pop = @result["hits"]["hits"][0]["_source"]["popularity"]
 
   p = Path.new
   p.path_id = @path_id

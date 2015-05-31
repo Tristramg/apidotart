@@ -46,7 +46,8 @@ id: '<%= img.url %>' + prev,
     source: prev,
     label: "couocou",
     target: '<%= img.rmn_id %>',
-    size: 1
+    type: 'curvedArrow',
+    size: 0.1
             }
             g.edges.push(edge);
           };
@@ -66,7 +67,8 @@ s = new sigma({
   settings: {
     maxNodeSize: 50,
     maxEdgeSize: 10,
-    autoResize: false
+    labelThreshold: 1,
+    defaultLabelColor: '#F00'
   }
 });
     // Finally, let's ask our sigma instance to refresh:

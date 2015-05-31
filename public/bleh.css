@@ -1,10 +1,16 @@
 body {
   padding: 10px;
-  background-color: #eee;
-}
+  background-color: white;
+ }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Roboto Slab', serif;
+  font-weight: 100;
+}
+
+h1 {
+  text-align: center;
+  letter-spacing: 0.2em;
 }
 
 p, div {
@@ -12,9 +18,16 @@ p, div {
 }
 
 .form-search {
-  max-width: 330px;
-  padding: 15px;
+  width: 100%;
+  padding: 25px;
   margin: 300px auto 0 auto;
+  background-color: rgba(0,0,0,0.1);
+}
+
+
+#input{
+  width: 400px;
+  margin: 0 auto;
 }
 
 #images {
@@ -22,22 +35,43 @@ p, div {
 }
 
 #grid[data-columns]::before {
-	content: '4 .column.size-1of3';
+	content: '3 .column.size-1of3';
 }
 
 /* These are the classes that are going to be applied: */
 .column { float: left; }
-.size-1of4 { width: 25%; }
+.size-1of3 { width: 33.33%; }
 
 .item {
+  padding: 25px;
+}
+
+.item img {
   padding: 5px;
 }
 
 .autres {
   text-align: center;
   margin-top: 10px;
+  font-weight: bold;
+  letter-spacing: 0.1em;
 }
 
 #arbre{ 
   height: 100%;
 }
+
+
+h4 {
+  color: #222;
+}
+
+.date {
+  color: #888;
+  font-style: italic;
+}
+
+.author {
+  color: #888;
+}
+

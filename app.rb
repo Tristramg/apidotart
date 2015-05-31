@@ -33,6 +33,17 @@ end
 get '/' do
   @path_id = SecureRandom.hex
 
+  @bg = <<END
+<style>
+body{
+background-repeat:no-repeat;
+background-image: url(/rmn.png);
+background-position: center; 
+background-opacity: 0.8;
+}
+</style>
+END
+
   erb :index
 end
 
@@ -51,7 +62,7 @@ get '/works' do
   @path_id = params[:path_id]
   @origin_key = params[:origin_key]
   @origin_value = @origin_key == "start" ? q : params[:origin_value]
-  @result = get_api("http://api.art.rmngp.fr/v1/works?q=#{q}&per_page=20")
+  @result = get_api("http://api.art.rmngp.fr/v1/works?q=#{q}")
 
   erb :work
 end

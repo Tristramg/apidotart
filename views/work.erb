@@ -4,9 +4,20 @@
   <% @result["hits"]["hits"].each do |hit| %>
     <% image = hit["_source"]["images"][0]["urls"] %>
     <div class="item">
+      <div>
     <a href="/links/<%= hit["_id"] %>?path_id=<%=@path_id%>&origin_key=<%=@origin_key%>&origin_value=<%=@origin_value%>">
       <img style="width:100%" src="<%= image["medium"]["url"] %>">
     </a>
+    <% if hit["_source"]["title"] %>
+      <h4><%= hit["_source"]["title"]["fr"] %></h4>
+    <% end %>
+    <% if hit["_source"]["authors"] && hit["_source"]["authors"][0] %>
+      <span class="author"><%= hit["_source"]["authors"][0]["name"]["fr"] %></span>
+    <% if hit["_source"]["date"] %>
+      <span class="date">(<%=hit["_source"]["date"]["display"]%>)</span>
+    <% end %>
+  <% end %>
+  </div>
   </div>
   <% end %>
   <% end %>

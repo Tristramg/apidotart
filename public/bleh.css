@@ -32,3 +32,8 @@ p, div {
 .item {
   padding: 5px;
 }
+
+.autres {
+  text-align: center;
+  margin-top: 10px;
+}

@@ -3,6 +3,14 @@
   <script src="./plugins/sigma.renderers.customShapes.min.js"></script>
   <script src="./plugins/sigma.layout.forceAtlas2.min.js"></script>
   <script>
+var random_id = function() {
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+      var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
+      return v.toString(16);
+      });
+};
+
+
 sigma.utils.pkg('sigma.canvas.nodes');
 console.log( ShapeLibrary.enumerate() );
 
@@ -42,7 +50,7 @@ url: '<%= img.url %>',
 
       if (prev != null) {
             edge = {
-id: '<%= img.url %>' + prev,
+   id: random_id(),
     source: prev,
     label: "couocou",
     target: '<%= img.rmn_id %>',

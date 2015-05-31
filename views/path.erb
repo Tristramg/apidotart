@@ -1,7 +1,4 @@
   <div id="container" style="height:100%;"></div>
-  <script src="./sigma.min.js"></script>
-  <script src="./plugins/sigma.renderers.customShapes.min.js"></script>
-  <script src="./plugins/sigma.layout.forceAtlas2.min.js"></script>
   <script>
 var random_id = function() {
   return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
@@ -27,14 +24,14 @@ var y = 0;
   x=0;
   var prev = null;
   <% path.each do |img| %>
-    x+=2;
     if(!existingNodes.has('<%=img.rmn_id%>')) {
+    x+= 2 + (Math.random() * 0.5 - 0.25);
       node = {
       // Main attributes:
 id: '<%= img.rmn_id %>',
       // Display attributes:
       x: x,
-      y: y,
+      y: y + (Math.random() * 0.5 - 0.25),
       size: 8,
       type: 'circle',
       image: {

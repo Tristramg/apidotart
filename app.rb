@@ -73,6 +73,8 @@ get '/links/:id' do
   p.url = @image
   p.save
 
+  @path = Path.where(path_id: @path_id)
+
   erb :links
 end
 

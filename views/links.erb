@@ -22,6 +22,88 @@
 </ul>
 </div>
 
-<div class="col-md-4">
-  ARRRRRBBRRRE
+<div class="col-md-4" id="arbre">
 </div>
+
+<script>
+var random_id = function() {
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+      var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
+      return v.toString(16);
+      });
+};
+
+
+sigma.utils.pkg('sigma.canvas.nodes');
+console.log( ShapeLibrary.enumerate() );
+
+var  g = {
+      nodes: [],
+      edges: []
+    };
+
+var existingNodes = new Set();
+
+var x = 0;
+var y = 0;
+  var prev = null;
+  <% @path.each do |img| %>
+    if(!existingNodes.has('<%=img.rmn_id%>')) {
+    y-=2;
+      node = {
+      // Main attributes:
+id: '<%= img.rmn_id %>',
+      // Display attributes:
+      x: Math.random() * 2 - 1,
+      y: y,
+      size: 8,
+      type: 'circle',
+      image: {
+url: '<%= img.url %>',
+      clip: 1,
+        scale: 1.6,
+      }
+      };
+          
+      g.nodes.push(node);
+      existingNodes.add('<%=img.rmn_id%>');
+      }
+
+      if (prev != null) {
+            edge = {
+   id: random_id(),
+    source: prev,
+    label: "couocou",
+    target: '<%= img.rmn_id %>',
+    type: 'curvedArrow',
+    size: 0.1
+            }
+            g.edges.push(edge);
+          };
+prev = '<%= img.rmn_id %>';
+      <% end %>
+
+s = new sigma({
+  graph: g,
+  renderer: {
+    // IMPORTANT:
+    // This works only with the canvas renderer, so the
+    // renderer type set as "canvas" is necessary here.
+    container: document.getElementById('arbre'),
+    type: 'canvas'
+  },
+  settings: {
+    maxNodeSize: 40,
+    maxEdgeSize: 5,
+    labelThreshold: 1,
+    defaultLabelColor: '#F00'
+  }
+});
+    // Finally, let's ask our sigma instance to refresh:
+    CustomShapes.init(s);
+    s.refresh();
+    //s.startForceAtlas2({worker: true, barnesHutOptimize: false});
+
+  </script>
+
+
